@@ -7,6 +7,10 @@ inputs:
   sfdx-version:
     description: 'version of SFDX to install'
     required: false
+  use-sf:
+    description: 'boolean indicating whether to use sf (v2) over sfdx-cli (v7)'
+    required: false
+    default: 'False'
 runs:
     using: "composite"
     steps:
@@ -29,9 +33,15 @@ runs:
           node-version: 16
           cache: npm
           cache-dependency-path: actions-sfdx-version.txt
-      - name: Install sfdx
+      - name: Install sfdx-cli
+        if: ${{ inputs.use-sf == 'False' || inputs.use-sf == 'false' }}
         run: |
           npm install -g 'sfdx-cli@${{ steps.versions.outputs.sfdx-version }}'
+        shell: bash
+      - name: Install @salesforce/cli
+        if: ${{ inputs.use-sf == 'True' || inputs.use-sf == 'true' }}
+        run: |
+          npm install -g '@salesforce/cli@${{ steps.versions.outputs.sfdx-version }}'
         shell: bash
       - name: Set Up Python
         uses: actions/setup-python@v3
