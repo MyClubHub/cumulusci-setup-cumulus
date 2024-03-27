@@ -51,5 +51,5 @@ runs:
           cache-dependency-path: actions-cci-version.txt
       - name: Install CumulusCI
         run: |
-          pip install git+https://github.com/leboff/CumulusCI.git@bugfix/1gp-error
+          pip install git+https://github.com/leboff/CumulusCI.git
         shell: bash
