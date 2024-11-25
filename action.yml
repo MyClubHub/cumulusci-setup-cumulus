@@ -1,16 +1,12 @@
 name: Set Up Cumulus
-description: 'Install CumulusCI and sfdx'
+description: 'Install CumulusCI and sf cli'
 inputs:
   cumulusci-version:
     description: 'version of CumulusCI to install'
     required: false
-  sfdx-version:
-    description: 'version of SFDX to install'
+  sf-version:
+    description: 'version of SF CLI to install'
     required: false
-  use-sf:
-    description: 'boolean indicating whether to use sf (v2) over sfdx-cli (v7)'
-    required: false
-    default: 'False'
 runs:
     using: "composite"
     steps:
@@ -18,13 +14,13 @@ runs:
         id: versions
         # Note: we do not pin an action tag here. This is deliberate,
         # to allow us flexibility in pinning specific package versions.
-        uses: cumulus-actions/default-package-versions@main
+        uses: MyClubHub/cumulusci-default-package-versions@main
         with:
           cumulusci-version: '${{ inputs.cumulusci-version }}'
-          sfdx-version: '${{ inputs.sfdx-version }}'
+          sf-version: '${{ inputs.sf-version }}'
       - name: Store Versions
         run: |
-          echo '${{ steps.versions.outputs.sfdx-version }}' > actions-sfdx-version.txt
+          echo '${{ steps.versions.outputs.sf-version }}' > actions-sf-version.txt
           echo '${{ steps.versions.outputs.cumulusci-version }}' > actions-cci-version.txt
         shell: bash
       - name: Set Up Node 
@@ -32,16 +28,10 @@ runs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: actions-sfdx-version.txt
-      - name: Install sfdx-cli
-        if: ${{ inputs.use-sf == 'False' || inputs.use-sf == 'false' }}
-        run: |
-          npm install -g 'sfdx-cli@${{ steps.versions.outputs.sfdx-version }}'
-        shell: bash
+          cache-dependency-path: actions-sf-version.txt
       - name: Install @salesforce/cli
-        if: ${{ inputs.use-sf == 'True' || inputs.use-sf == 'true' }}
         run: |
-          npm install -g '@salesforce/cli@${{ steps.versions.outputs.sfdx-version }}'
+          npm install -g '@salesforce/cli@${{ steps.versions.outputs.sf-version }}'
         shell: bash
       - name: Set Up Python
         uses: actions/setup-python@v5
