@@ -41,5 +41,5 @@ runs:
           cache-dependency-path: actions-cci-version.txt
       - name: Install CumulusCI
         run: |
-          pip install git+MyClubHub/CumulusCI.git
+          pip install git+https://github.com/MyClubHub/CumulusCI.git
         shell: bash
