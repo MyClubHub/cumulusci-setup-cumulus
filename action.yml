@@ -39,7 +39,7 @@ runs:
         shell: bash
       - name: Install Playwright
         run: |
-          npm install playwright
+          npm init playwright@latest
         shell: bash
       - name: Set Up Python
         uses: actions/setup-python@v5
