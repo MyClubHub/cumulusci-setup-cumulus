@@ -33,6 +33,10 @@ runs:
         run: |
           npm install -g '@salesforce/cli@${{ steps.versions.outputs.sf-version }}'
         shell: bash
+      - name: Install SFDMU plugin
+        run: |
+          sf plugins install sfdmu
+        shell: bash
       - name: Set Up Python
         uses: actions/setup-python@v5
         with:
