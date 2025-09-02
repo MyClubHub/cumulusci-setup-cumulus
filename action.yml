@@ -37,9 +37,6 @@ runs:
         run: |
           sf plugins install sfdmu
         shell: bash
-      - name: Install Playwright
-        run: |
-          npm install -D playwright
         shell: bash
       - name: Set Up Python
         uses: actions/setup-python@v5
