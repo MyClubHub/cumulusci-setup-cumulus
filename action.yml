@@ -48,5 +48,5 @@ runs:
           pip install git+https://github.com/MyClubHub/CumulusCI.git
         shell: bash
       - name: Install Node dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
         shell: bash
