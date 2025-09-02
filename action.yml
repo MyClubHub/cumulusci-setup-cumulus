@@ -47,7 +47,5 @@ runs:
         run: |
           pip install git+https://github.com/MyClubHub/CumulusCI.git
         shell: bash
-      - name: Install Playwright 
-        run: |
-          cci robot install_playwright
-        shell: bash
+      - name: Install Node dependencies
+        run: npm install
