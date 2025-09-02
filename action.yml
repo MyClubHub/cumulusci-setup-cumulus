@@ -47,6 +47,6 @@ runs:
         run: |
           pip install git+https://github.com/MyClubHub/CumulusCI.git
         shell: bash
-      - name: Install Node dependencies
-        run: npm install --legacy-peer-deps
+      - name: Install Playwright
+        run: npm install playwright@latest --legacy-peer-deps
         shell: bash
