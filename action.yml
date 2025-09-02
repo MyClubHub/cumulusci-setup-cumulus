@@ -58,5 +58,5 @@ runs:
         run: |
           npm install playwright@latest --legacy-peer-deps
           npx playwright install
-          xvfb-run npx playwright test
+          xvfb-run npx playwright test --legacy-peer-deps
         shell: bash
