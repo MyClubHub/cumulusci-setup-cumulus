@@ -49,3 +49,4 @@ runs:
         shell: bash
       - name: Install Node dependencies
         run: npm install
+        shell: bash
