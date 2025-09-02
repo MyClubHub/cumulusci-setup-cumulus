@@ -7,6 +7,11 @@ inputs:
   sf-version:
     description: 'version of SF CLI to install'
     required: false
+  delete-scratch-org:
+    type: string
+    description: 'Specify whether to delete the Scratch org'
+    required: false
+    default: true
 runs:
     using: "composite"
     steps:
@@ -33,10 +38,6 @@ runs:
         run: |
           npm install -g '@salesforce/cli@${{ steps.versions.outputs.sf-version }}'
         shell: bash
-      - name: Install SFDMU plugin
-        run: |
-          sf plugins install sfdmu
-        shell: bash
       - name: Set Up Python
         uses: actions/setup-python@v5
         with:
@@ -47,7 +48,13 @@ runs:
         run: |
           pip install git+https://github.com/MyClubHub/CumulusCI.git
         shell: bash
+      - name: Install SFDMU plugin
+        if: ${{ (inputs.delete-scratch-org == 'false') }}
+        run: |
+          sf plugins install sfdmu
+        shell: bash
       - name: Install Playwright
+        if: ${{ (inputs.delete-scratch-org == 'false') }}
         run: |
           npm install playwright@latest --legacy-peer-deps
           npx playwright install
