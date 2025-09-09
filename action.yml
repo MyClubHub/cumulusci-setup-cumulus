@@ -7,11 +7,6 @@ inputs:
   sf-version:
     description: 'version of SF CLI to install'
     required: false
-  delete-scratch-org:
-    type: string
-    description: 'Specify whether to delete the Scratch org'
-    required: false
-    default: true
 runs:
     using: "composite"
     steps:
@@ -49,12 +44,10 @@ runs:
           pip install git+https://github.com/MyClubHub/CumulusCI.git
         shell: bash
       - name: Install SFDMU plugin
-        if: ${{ (inputs.delete-scratch-org == 'false') }}
         run: |
           sf plugins install sfdmu
         shell: bash
       - name: Install Playwright
-        if: ${{ (inputs.delete-scratch-org == 'false') }}
         run: |
           npm install playwright@latest --legacy-peer-deps
           npx playwright install
