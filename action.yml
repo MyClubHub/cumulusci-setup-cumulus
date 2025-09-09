@@ -47,8 +47,3 @@ runs:
         run: |
           sf plugins install sfdmu
         shell: bash
-      - name: Install Playwright
-        run: |
-          npm install playwright@latest --legacy-peer-deps
-          npx playwright install
-        shell: bash
