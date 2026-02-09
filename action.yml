@@ -47,3 +47,9 @@ runs:
         run: |
           sf plugins install sfdmu
         shell: bash
+      - name: Pin setuptools to 80.10.1
+        run: |
+          python -m pip install --upgrade pip
+          pip uninstall -y setuptools
+          pip install setuptools==80.10.1 wheel
+        shell: bash
