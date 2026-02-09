@@ -43,10 +43,6 @@ runs:
         run: |
           pip install git+https://github.com/MyClubHub/CumulusCI.git
         shell: bash
-      - name: Check CCI version
-        run: |
-          cci version
-        shell: bash
       - name: Install SFDMU plugin
         run: |
           sf plugins install sfdmu
