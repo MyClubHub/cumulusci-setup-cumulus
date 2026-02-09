@@ -24,7 +24,7 @@ runs:
           echo '${{ steps.versions.outputs.cumulusci-version }}' > actions-cci-version.txt
         shell: bash
       - name: Set Up Node 
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: npm
@@ -34,7 +34,7 @@ runs:
           npm install -g '@salesforce/cli@${{ steps.versions.outputs.sf-version }}'
         shell: bash
       - name: Set Up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.14"
           # cache: pip
