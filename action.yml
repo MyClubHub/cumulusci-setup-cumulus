@@ -41,14 +41,18 @@ runs:
           cache-dependency-path: actions-cci-version.txt
       - name: Ensure setuptools is installed
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade setuptools wheel
+          python -m pip install --upgrade pip wheel
+        shell: bash
+      - name: Force setuptools with pkg_resources
+        run: |
+          python -m pip uninstall -y setuptools
+          python -m pip install "setuptools<70"
         shell: bash
       - name: Verify pkg_resources
         run: |
           python - <<EOF
           import pkg_resources
-          print(pkg_resources.__file__)
+          print("pkg_resources available")
           EOF
         shell: bash
       - name: Install CumulusCI
