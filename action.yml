@@ -52,12 +52,6 @@ runs:
       - name: Install Playwright system deps only (cached)
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright@1.51.0 install-deps chromium
-
-      - name: Run Playwright script
-        env:
-          endpoint: ${{ github.event.inputs.endpoint }}
-          sessionId: ${{ github.event.inputs.sessionId }}
-        run: node ${{ github.event.inputs.script }}
       
       - name: Install @salesforce/cli
         run: |
